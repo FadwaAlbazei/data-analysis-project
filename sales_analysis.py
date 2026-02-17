@@ -21,3 +21,20 @@ if 'Sales' in data.columns:
     plt.show()
 else:
     print("Column 'Sales' not found in dataset.")
+
+# Convert Date column to datetime
+if 'Date' in data.columns:
+    data['Date'] = pd.to_datetime(data['Date'])
+    data.set_index('Date', inplace=True)
+
+    # Monthly sales summary
+    monthly_sales = data['Sales'].resample('M').sum()
+    print("\nMonthly Sales Summary:")
+    print(monthly_sales)
+
+    # Plot monthly sales
+    monthly_sales.plot(kind='bar')
+    plt.title("Monthly Sales")
+    plt.xlabel("Month")
+    plt.ylabel("Total Sales")
+    plt.show()
